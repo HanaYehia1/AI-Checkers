@@ -152,6 +152,7 @@ class Board:
         return moves
     
     def remove(self, pieces):
+    # Remove the specified pieces from the board and update the count of remaining pieces for each color
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
             if piece != 0:
@@ -162,8 +163,23 @@ class Board:
                 
 
     def winner(self):
+        # Check if one color has no pieces left
         if self.white_left <= 0:
             return BLACK
         elif self.black_left <= 0:
             return WHITE
+        # If neither color has no pieces left, there is no winner yet
         return None
+        
+    def calculate(self):
+        # Calculates the evaluation of the current position
+        return self.black_left - self.white_left + (self.black_kings * 0.5 - self.white_kings * 0.5)
+    
+    def get_pieces(self,color):
+        # Returns the pieces of the specified color
+        pieces = []
+        for row in self.board:
+            for piece in row:
+                if piece != 0 and piece.color == color:
+                    pieces.append(piece)
+        return pieces

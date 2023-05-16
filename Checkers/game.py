@@ -87,3 +87,10 @@ class Game:
                 text = font.render('Black Wins!', 1, WHITE)
             self.win.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
             pygame.display.update()
+
+    def get_board(self):
+        return self.board
+    
+    def ai_move(self,board):
+        self.board = board
+        self.change_turn()
