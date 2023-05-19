@@ -7,13 +7,15 @@ class Game:
     def __init__(self,win):
         # Initialize the game by setting its initial state and creating a new board
         self._init()
+        
         self.win = win
 
     def update(self):
         # Update the game by drawing the board and the valid moves and updating the display
-        self.board.draw(self.win)
-        self.draw_valid_moves(self.valid_moves)
-        pygame.display.update()
+        if self.win != None and self.board != None:
+            self.board.draw(self.win)
+            self.draw_valid_moves(self.valid_moves)
+            pygame.display.update()
 
     def _init(self):
         # Set the initial state of the game by selecting no piece, creating a new board, setting the turn to white, and setting the valid moves to an empty dictionary
@@ -27,7 +29,8 @@ class Game:
        self._init()
 
     def select(self, row, col):
-        # Select a piece on the board by setting it to be the selected piece if it is the player's turn and has valid moves, and return True. Otherwise, return False.
+        # Select a piece on the board by setting it to be the selected piece
+        # if it is the player's turn and has valid moves, and return True. Otherwise, return False.
         if self.selected:
             result = self._move(row,col)
             if not result:
@@ -71,6 +74,7 @@ class Game:
             row, col = move
             pygame.draw.circle(self.win, SILVER , (col* SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE //2),20)
 
+
     def winner(self):
         # Return the winner of the game by calling the winner method of the board
         return self.board.winner()
@@ -83,10 +87,13 @@ class Game:
             font = pygame.font.SysFont('comicsans', 100)
             if winner == WHITE:
                 text = font.render('White Wins!', 1, BLACK)
-            else:
+            elif winner == BLACK:
                 text = font.render('Black Wins!', 1, WHITE)
+            elif winner == None:
+                text = font.render('ITS A DRAW!', 1, SILVER)
             self.win.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
             pygame.display.update()
+
 
     def get_board(self):
         return self.board

@@ -46,6 +46,7 @@ class Board:
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         # Update the piece's position on the board
         piece.move(row, col)
+        self.moves__done = 0
         # If the piece reaches the opposite end of the board, it becomes a king
         if row == ROWS - 1 or row == 0:
             piece.make_king()
@@ -79,25 +80,49 @@ class Board:
         # Check if the piece is a white piece or a king
         if piece.color == WHITE or piece.king:
             # If the piece is a white piece or a king, check for valid moves in the left direction
-            moves.update(self._go_left(row - 1, max(row - 3, -1), -1, piece.color, left))
+            moves.update(self._move_left(row - 1, max(row - 3, -1), -1, piece.color, left))
             # If the piece is a white piece or a king, check for valid moves in the right direction
-            moves.update(self._go_right(row - 1, max(row - 3, -1), -1, piece.color, right))
+            moves.update(self._move_right(row - 1, max(row - 3, -1), -1, piece.color, right))
         # Check if the piece is a black piece or a king
         if piece.color == BLACK or piece.king:
             # If the piece is a black piece or a king, check for valid moves in the left direction
-            moves.update(self._go_left(row + 1, min(row + 3, ROWS), 1, piece.color, left))
+            moves.update(self._move_left(row + 1, min(row + 3, ROWS), 1, piece.color, left))
             # If the piece is a black piece or a king, check for valid moves in the right direction
-            moves.update(self._go_right(row + 1, min(row + 3, ROWS), 1, piece.color, right))
+            moves.update(self._move_right(row + 1, min(row + 3, ROWS), 1, piece.color, right))
         # Return the dictionary of valid moves
         return moves
 
-    def _go_left(self, start, stop, step, color, left, skipped=[]):
-        # Helper function used by get_valid_move() to find all the valid moves in the left direction for a given piece
+    def winner(self):
+        # Check if one color has no pieces left
+        if self.white_left <= 0:
+            return BLACK
+        elif self.black_left <= 0:
+            return WHITE
+        return None
+    
+    def get_pieces(self,color):
+        # Returns the pieces of the specified color
+        pieces = []
+        for row in self.board:
+            for piece in row:
+                if piece != 0 and piece.color == color:
+                    pieces.append(piece)
+        return pieces
+    
+    #this function recursively explores all valid moves
+    #a piece can make in the left direction, taking into account 
+    #any pieces that need to be skipped over during the move.
+    def _move_left(self, start, stop, step, color, left, skipped=[]):
+        #initializes an empty dictionary to store the valid moves found by the function
         moves = {}
+        #initializes an empty list to store any pieces that have been skipped over during the current move
         last = []
+        #iterates over the rows from start to stop
         for r in range(start, stop, step):
+            #checks if the current column is out of bounds
             if left < 0:
                 break
+            #gets the piece located at the current row and column on the board
             current = self.board[r][left]
             if current == 0:
                 if skipped and not last:
@@ -111,8 +136,8 @@ class Board:
                         row = max(r - 3, 0)
                     else:
                         row = min(r + 3, ROWS)
-                    moves.update(self._go_left(r + step, row, step, color, left - 1, skipped=last))
-                    moves.update(self._go_right(r + step, row, step, color, left + 1, skipped=last))
+                    moves.update(self._move_left(r + step, row, step, color, left - 1, skipped=last))
+                    moves.update(self._move_right(r + step, row, step, color, left + 1, skipped=last))
                 break
             elif current.color == color:
                 break
@@ -121,7 +146,11 @@ class Board:
             left -= 1
         return moves
     
-    def _go_right(self, start, stop, step, color, right, skipped=[]):
+
+    #this function recursively explores all valid moves
+    #a piece can make in the right direction, taking into account 
+    #any pieces that need to be skipped over during the move.
+    def _move_right(self, start, stop, step, color, right, skipped=[]):
         # Helper function used by get_valid_move() to find all the valid moves in the right direction for a given piece
         moves = {}
         last = []
@@ -141,8 +170,8 @@ class Board:
                         row = max(r - 3, 0)
                     else:
                         row = min(r + 3, ROWS)
-                    moves.update(self._go_left(r + step, row, step, color, right - 1, skipped=last))
-                    moves.update(self._go_right(r + step, row, step, color, right + 1, skipped=last))
+                    moves.update(self._move_left(r + step, row, step, color, right - 1, skipped=last))
+                    moves.update(self._move_right(r + step, row, step, color, right + 1, skipped=last))
                 break
             elif current.color == color:
                 break
@@ -162,24 +191,8 @@ class Board:
                     self.black_left -=1
                 
 
-    def winner(self):
-        # Check if one color has no pieces left
-        if self.white_left <= 0:
-            return BLACK
-        elif self.black_left <= 0:
-            return WHITE
-        # If neither color has no pieces left, there is no winner yet
-        return None
-        
-    def calculate(self):
+
+    def evaluate(self):
         # Calculates the evaluation of the current position
         return self.black_left - self.white_left + (self.black_kings * 0.5 - self.white_kings * 0.5)
     
-    def get_pieces(self,color):
-        # Returns the pieces of the specified color
-        pieces = []
-        for row in self.board:
-            for piece in row:
-                if piece != 0 and piece.color == color:
-                    pieces.append(piece)
-        return pieces
