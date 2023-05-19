@@ -1,4 +1,5 @@
 from copy import deepcopy
+from Checkers.board import Board
 import pygame
 
 WHITE = (255, 255, 255)
@@ -13,7 +14,7 @@ def minimax(position, depth, max_player, game):
     if max_player:
         maxEval = float('-inf')
         best_move = None
-        for move in get_all_moves(position, BLACK, game):
+        for move in get_all_moves(position, max_player, game):
             evaluation = minimax(move, depth-1, False, game)[0]
             maxEval = max(maxEval, evaluation)
             if maxEval == evaluation:
@@ -29,6 +30,34 @@ def minimax(position, depth, max_player, game):
             if minEval == evaluation:
                 best_move = move
         
+        return minEval, best_move
+
+def minimax_alpha(position, depth, alpha, beta,max_player, game):
+    if depth == 0 or position.winner() != None:
+        return position.calculate(), position
+    if max_player:
+        maxEval = float('-inf')
+        best_move = None
+        for move in get_all_moves(position, max_player, game):
+            evaluation = minimax_alpha(move, depth-1, alpha, beta, False, game)[0]
+            maxEval = max(maxEval, evaluation)
+            if maxEval == evaluation:
+                best_move = move
+            alpha = max(alpha, maxEval)
+            if beta <= alpha:
+                break
+        return maxEval, best_move
+    else:
+        minEval = float('inf')
+        best_move = None
+        for move in get_all_moves(position, WHITE, game):
+            evaluation = minimax_alpha(move, depth-1, alpha, beta, True, game)[0]
+            minEval = min(minEval, evaluation)
+            if minEval == evaluation:
+                best_move = move
+            beta = min(beta, minEval)
+            if beta <= alpha:
+                break
         return minEval, best_move
 
 
