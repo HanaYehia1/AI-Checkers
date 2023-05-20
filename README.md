@@ -24,7 +24,26 @@ This is a project for a checkers game where there's several game modes whether P
 
  - **algo.py ->** *contains the implementation of minimax algorithm and minimaxAI which is for the Computer vs Compter mode also contains a modified minimax with alpha-beta pruning.*
 
-## main
+## main.py
 
  - contains a window that starts at the beginning of the game to choose the game option, algorithm type and difficulty level then prompts the user to the game screen to play
+
+ ## Graphs Measuring The Performance
+ 
+
+>  The Following Graphs Explains The Difference in performance of
+> difficulty levels whether the algorithm is Minimax or Minimax with
+> Alpha-Beta Pruning it measures the performance according to Time taken
+> for each piece to move over the total number of moves taken to finish
+> the game
+ 
+*Easy Mode Graph :-*
+![Easy Graph](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/386bad5f-5d8f-41c0-a63e-55f8eae3245c)
+
+*Medium Mode Graph :-*
+![Medium Graph](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/817384e2-6989-42a6-97e9-ee8604d1e84d)
+
+*Hard Mode Graph :-*
+![Hard Graph](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/4b17781f-4453-4b7f-92d8-41dfb836fc12)
+
 
