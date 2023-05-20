@@ -1,7 +1,8 @@
 # AI Checkers Game
 This is a project for a checkers game where there's several game modes whether PVP, CVP and CVC.
 
-> **We Didn't use any help from ChatGPT or any Helping bot so we don't have screenshots for a conversation**
+## **Linkedin post link**
+https://www.linkedin.com/posts/hana-ayman-a01154236_ai-checkers-gamedevelopment-activity-7065744233772589056-pU_M?utm_source=share&utm_medium=member_ios
 
 ## To Run This project :
 
