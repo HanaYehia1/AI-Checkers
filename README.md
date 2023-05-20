@@ -53,3 +53,13 @@ https://www.linkedin.com/posts/hana-ayman-a01154236_ai-checkers-gamedevelopment-
 
 ![Hard](https://github.com/HanaYehia1/AI-Checkers/assets/119138360/085e2154-5ec0-455d-9556-76aab6d0947a)
 
+## *Screenshots of our convo with chatGPT :- *
+![2023-05-20 (1)](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/a57de8c5-b226-4769-bd09-b919628be3e5)
+
+![2023-05-20 (3)](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/893635ac-507d-44af-b549-0f7174359630)
+
+![2023-05-20 (4)](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/a5008d86-4580-49a0-b2d5-46df9f4f573b)
+
+![2023-05-20 (6)](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/af753c90-6520-46b0-a42f-80860b726d14)
+
+
