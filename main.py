@@ -68,14 +68,16 @@ def start_game():
 
             if game.winner() != None:
                 run = False
+
             #checks if it is currently the black player's turn to move.
             if game.turn == BLACK:
                 if algorithm_type =="Minimax":
                     value, new_board = minimax(game.get_board(), depth, BLACK, game)
                     game.ai_move(new_board)
                     pygame.time.delay(300)
+                    
                 elif algorithm_type == "Minimax with Alpha-Beta Pruning":
-                    value, new_board = minimax_alpha(game.get_board(), depth,float('inf'),float('-inf'), BLACK, game)
+                    value, new_board = minimax_alpha(game.get_board(), depth,float('-inf'),float('inf'), BLACK, game)
                     game.ai_move(new_board)
                     pygame.time.delay(300)
             elif game.turn == WHITE:
@@ -104,7 +106,7 @@ def start_game():
                 if game.winner()== WHITE:
                     run = False
                 else:
-                    value, new_board = minimaxAI(game.get_board(), 3, WHITE, game)
+                    value, new_board = minimaxAI(game.get_board(), 2, WHITE, game)
                     game.ai_move(new_board)
                     pygame.time.delay(300)
             elif game.turn==BLACK:
@@ -116,7 +118,7 @@ def start_game():
                         game.ai_move(new_board)
                         pygame.time.delay(300)
                     elif algorithm_type == "Minimax with Alpha-Beta Pruning":
-                        value, new_board = minimax_alphaAI(game.get_board(), depth,float('inf'),float('-inf'), BLACK, game)
+                        value, new_board = minimax_alphaAI(game.get_board(), depth,float('-inf'),float('inf'), BLACK, game)
                         game.ai_move(new_board)
                         pygame.time.delay(300)
                 # Update the game display
@@ -150,7 +152,6 @@ game_var.set(game_options[0])
 #creates a dropdown menu with game optionts to select game mode
 game_dropdown = tk.OptionMenu(root, game_var, *game_options)
 game_dropdown.pack(pady=10)
-
 algorithm_label = tk.Label(root,text="Select Algorithm Type:",font=("Helvetica", 14))
 algorithm_label.pack(pady=10)
 algorithm_options = ["Minimax", "Minimax with Alpha-Beta Pruning"]
