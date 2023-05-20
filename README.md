@@ -42,14 +42,13 @@ This is a project for a checkers game where there's several game modes whether P
  
 ## *Easy Mode Graph :-*
 
-![Easy Graph](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/386bad5f-5d8f-41c0-a63e-55f8eae3245c)
+![Easy](https://github.com/HanaYehia1/AI-Checkers/assets/119138360/609342b6-ab50-4c28-b1a6-4bb23d7d63f0)
 
 ## *Medium Mode Graph :-*
 
-![Medium Graph](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/817384e2-6989-42a6-97e9-ee8604d1e84d)
+![Medium](https://github.com/HanaYehia1/AI-Checkers/assets/119138360/1d686cab-5e36-4188-bf31-4d62f9922559)
 
 ## *Hard Mode Graph :-*
 
-![Hard Graph](https://github.com/HanaYehia1/AI-Checkers/assets/119336951/4b17781f-4453-4b7f-92d8-41dfb836fc12)
-
+![Hard](https://github.com/HanaYehia1/AI-Checkers/assets/119138360/085e2154-5ec0-455d-9556-76aab6d0947a)
 
