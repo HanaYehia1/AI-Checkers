@@ -1,5 +1,8 @@
 # AI Checkers Game
 This is a project for a checkers game where there's several game modes whether PVP, CVP and CVC.
+
+> **We Didn't use any help from ChatGPT or any Helping bot so we don't have screenshots for a conversation**
+
 ## To Run This project :
 
  1. install pygame (open cmd -> pip install pygame)
